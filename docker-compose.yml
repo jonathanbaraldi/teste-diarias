@@ -1,0 +1,6 @@
+version: '2'
+services:
+  diarias-api:
+    image: registry.pgt.mpt.mp.br/diarias-api:1.0
+    ports:
+      - 80:8080
