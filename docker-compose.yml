@@ -1,6 +1,26 @@
 version: '2'
 services:
   diarias-api:
-    image: registry.pgt.mpt.mp.br/diarias-api:1.0
+    image: registry.pgt.mpt.mp.br/diarias-api:1.0 # build local
+    restart: "always"
     ports:
-      - 80:8080
+      - 8080
+    networks:
+      - front-tier
+      - back-tier
+  lb:
+    image: dockercloud/haproxy
+    ports:
+      - 9000:80
+    links:
+      - diarias-api
+    networks:
+      - front-tier
+      - back-tier
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
+networks:
+  front-tier:
+    driver: bridge
+  back-tier:
+    driver: bridge
