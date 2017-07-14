@@ -6,7 +6,7 @@ services:
     ports:
       - 8080
     networks:
-      - front-tier
+      # - front-tier
       - back-tier
   lb:
     image: dockercloud/haproxy
